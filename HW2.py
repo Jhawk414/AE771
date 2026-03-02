@@ -1,4 +1,5 @@
-from constants import g0
+import math
+from constants import g0, STD_ATMOSPHERE
 
 SEP  = "=" * 60
 DIV  = "-" * 60
@@ -68,5 +69,88 @@ def example_2_1(
     print(SEP)
 
 
+def example_2_2(
+    t_burn=40.0,       # Burn duration (s)
+    m0=1210.0,         # Initial propulsion system mass (kg)
+    mf=215.0,          # Rocket motor mass after test (kg)
+    F_sl=62_250.0,     # Measured sea-level thrust (N)
+    p1=7.00e6,         # Chamber pressure (Pa)
+    p2=70_000.0,       # Nozzle exit pressure (Pa)
+    d_t=0.0855,        # Nozzle throat diameter (m)
+    d_2=0.2703,        # Nozzle exit diameter (m)
+    altitudes=None,    # Altitudes (m) to evaluate; must exist in STD_ATMOSPHERE
+):
+    """
+    Example 2-2 — Solid propellant rocket motor sea-level test (Sutton & Biblarz).
+
+    Solves for m_dot, c*, c, and nozzle exit velocity v2, then evaluates
+    pressure thrust, total thrust, and specific impulse at each altitude.
+    Thrust equation (Eq. 2-13): F = m_dot*v2 + (p2 - p3)*A2
+    Momentum thrust is invariant with altitude; only pressure thrust changes.
+    """
+    if altitudes is None:
+        altitudes = [0, 1_000, 25_000]
+
+    # --- Calculations ---
+    m_dot  = (m0 - mf) / t_burn
+    A_t    = math.pi / 4 * d_t**2
+    A_2    = math.pi / 4 * d_2**2
+    c_star = p1 * A_t / m_dot                       # characteristic velocity (all altitudes)
+    c      = F_sl / m_dot                            # effective exhaust velocity at sea level
+
+    # Solve Eq. 2-13 at sea level for v2 (invariant)
+    p3_sl      = STD_ATMOSPHERE[0]
+    v2         = (F_sl - (p2 - p3_sl) * A_2) / m_dot
+    F_momentum = m_dot * v2                          # momentum thrust (constant)
+
+    # --- Scalar output ---
+    print(f"\n{SEP}")
+    print(f"  Example 2-2: Solid Propellant Rocket Motor -- Sea-Level Test")
+    print(SEP)
+    print("  Inputs:")
+    _row("Burn duration (t_burn)",            f"{t_burn:>8.1f}", "s")
+    _row("Initial prop. system mass (m0)",    f"{m0:>8.1f}", "kg")
+    _row("Motor mass after test (mf)",        f"{mf:>8.1f}", "kg")
+    _row("Sea-level thrust (F_sl)",           f"{F_sl:>8.1f}", "N")
+    _row("Chamber pressure (p1)",             f"{p1/1e6:>8.3f}", "MPa")
+    _row("Nozzle exit pressure (p2)",         f"{p2/1e3:>8.2f}", "kPa")
+    _row("Nozzle throat diameter (d_t)",      f"{d_t*100:>8.2f}", "cm")
+    _row("Nozzle exit diameter (d_2)",        f"{d_2*100:>8.2f}", "cm")
+    print(DIV)
+    print("  Results (altitude-independent):")
+    _row("Mass flow rate (m_dot)",            f"{m_dot:>8.3f}", "kg/s")
+    _row("Throat area (A_t)",                 f"{A_t:>8.5f}", "m^2")
+    _row("Exit area (A_2)",                   f"{A_2:>8.5f}", "m^2")
+    _row("Characteristic velocity (c*)",      f"{c_star:>8.2f}", "m/s")
+    _row("Effective exhaust velocity (c)",    f"{c:>8.2f}", "m/s")
+    _row("Nozzle exit velocity (v2)",         f"{v2:>8.2f}", "m/s")
+    _row("Momentum thrust",                   f"{F_momentum:>8.1f}", "N")
+
+    # --- Altitude table ---
+    print(DIV)
+    print("  Altitude Performance (Eq. 2-13: F = m_dot*v2 + (p2-p3)*A2):\n")
+    C = [12, 10, 18, 16, 12, 8]  # column widths
+    header = (f"  {'Altitude (m)':>{C[0]}}  {'P3 (kPa)':>{C[1]}}"
+              f"  {'Press. Thrust (N)':>{C[2]}}  {'Mom. Thrust (N)':>{C[3]}}"
+              f"  {'Total F (N)':>{C[4]}}  {'Is (s)':>{C[5]}}")
+    print(header)
+    print("  " + "-" * (sum(C) + 2 * len(C)))
+
+    for alt in altitudes:
+        p3      = STD_ATMOSPHERE[alt]
+        F_press = (p2 - p3) * A_2
+        F_total = F_momentum + F_press
+        Is      = F_total / (m_dot * g0)
+        print(f"  {alt:>{C[0]},}"
+              f"  {p3/1e3:>{C[1]}.2f}"
+              f"  {F_press:>{C[2]}.0f}"
+              f"  {F_momentum:>{C[3]}.0f}"
+              f"  {F_total:>{C[4]}.0f}"
+              f"  {Is:>{C[5]}.1f}")
+
+    print(f"\n{SEP}")
+
+
 if __name__ == "__main__":
     example_2_1()
+    example_2_2()

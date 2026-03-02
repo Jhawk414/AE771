@@ -17,4 +17,4 @@ ISBN: 978-1-118-75388-0
 | File | Contents |
 |------|----------|
 | `constants.py` | Shared physical constants (`g0`) and Appendix 2 standard atmosphere table |
-| `HW2.py` | Chapter 2 example problems |
+| `HW2.py` | Chapter 2 example problems (Ex 2-1, Ex 2-2) |
