@@ -18,3 +18,16 @@ ISBN: 978-1-118-75388-0
 |------|----------|
 | `constants.py` | Shared physical constants (`g0`) and Appendix 2 standard atmosphere table |
 | `HW2.py` | Chapter 2 example problems (Ex 2-1, Ex 2-2) |
+| `HW3.py` | HW3: Minuteman first-stage rocket — net thrust & Isp vs. altitude (requires `matplotlib`) |
+
+## Running
+
+Each file can be run directly.  For `HW2.py`, pass one or more example keys to run only those problems:
+
+```
+python HW2.py          # all examples
+python HW2.py 2-1      # Example 2-1 only
+python HW2.py 2-2      # Example 2-2 only
+
+python HW3.py          # Minuteman thrust/Isp plot
+```

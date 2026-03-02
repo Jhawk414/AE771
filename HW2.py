@@ -1,5 +1,5 @@
 import math
-from constants import g0, STD_ATMOSPHERE
+from constants import g0, STD_ATMOSPHERE_SI
 
 SEP  = "=" * 60
 DIV  = "-" * 60
@@ -99,7 +99,7 @@ def example_2_2(
     c      = F_sl / m_dot                            # effective exhaust velocity at sea level
 
     # Solve Eq. 2-13 at sea level for v2 (invariant)
-    p3_sl      = STD_ATMOSPHERE[0]
+    p3_sl      = STD_ATMOSPHERE_SI[0].P
     v2         = (F_sl - (p2 - p3_sl) * A_2) / m_dot
     F_momentum = m_dot * v2                          # momentum thrust (constant)
 
@@ -137,7 +137,7 @@ def example_2_2(
     print("  " + "-" * (sum(C) + 2 * len(C)))
 
     for alt in altitudes:
-        p3      = STD_ATMOSPHERE[alt]
+        p3      = STD_ATMOSPHERE_SI[alt].P
         F_press = (p2 - p3) * A_2
         F_total = F_momentum + F_press
         Is      = F_total / (m_dot * g0)
@@ -152,5 +152,11 @@ def example_2_2(
 
 
 if __name__ == "__main__":
-    example_2_1()
-    example_2_2()
+    import sys
+    _EXAMPLES = {"2-1": example_2_1, "2-2": example_2_2}
+    keys = sys.argv[1:] or list(_EXAMPLES)
+    for k in keys:
+        if k in _EXAMPLES:
+            _EXAMPLES[k]()
+        else:
+            print(f"Unknown example '{k}'.  Choices: {list(_EXAMPLES)}")
