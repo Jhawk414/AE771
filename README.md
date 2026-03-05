@@ -17,8 +17,12 @@ ISBN: 978-1-118-75388-0
 | File | Contents |
 |------|----------|
 | `constants.py` | Shared physical constants (`g0`) and Appendix 2 standard atmosphere table |
+| `plot_style.py` | Registers the bundled Charter font and applies `ae771.mplstyle` |
+| `ae771.mplstyle` | Shared matplotlib style (Charter font, mathtext config) |
+| `Charter Regular.ttf` | Bundled font — no system installation required |
 | `HW2.py` | Chapter 2 example problems (Ex 2-1, Ex 2-2) |
-| `HW3.py` | HW3: Minuteman first-stage rocket — net thrust & Isp vs. altitude (requires `matplotlib`) |
+| `HW3.py` | HW3: Minuteman first-stage rocket — net thrust & Isp vs. altitude |
+| `HW4.py` | HW4: Ex 3-1 ideal nozzle (chamber pressure & area ratio); Fig 3-1 recreation |
 
 ## Running
 
@@ -30,4 +34,5 @@ python HW2.py 2-1      # Example 2-1 only
 python HW2.py 2-2      # Example 2-2 only
 
 python HW3.py          # Minuteman thrust/Isp plot
+python HW4.py          # Ex 3-1 console output + Fig 3-1 plot
 ```
