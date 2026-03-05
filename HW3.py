@@ -1,8 +1,6 @@
-import matplotlib as mpl
+import plot_style  # noqa: F401
 import matplotlib.pyplot as plt
 from constants import g0, STD_ATMOSPHERE_SI
-
-mpl.rcParams['font.family'] = 'Charter'
 
 SEP = "=" * 60
 DIV = "-" * 60

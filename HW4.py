@@ -1,9 +1,7 @@
+import plot_style  # noqa: F401
 import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-
-mpl.rcParams['font.family'] = 'Charter'
 
 SEP = "=" * 60
 DIV = "-" * 60

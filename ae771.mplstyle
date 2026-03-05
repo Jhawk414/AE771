@@ -1,0 +1,6 @@
+font.family        : Charter
+
+mathtext.fontset   : custom
+mathtext.rm        : Charter
+mathtext.it        : Charter:italic
+mathtext.bf        : Charter:bold
