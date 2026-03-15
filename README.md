@@ -23,6 +23,7 @@ ISBN: 978-1-118-75388-0
 | `HW2.py` | Chapter 2 example problems (Ex 2-1, Ex 2-2) |
 | `HW3.py` | HW3: Minuteman first-stage rocket — net thrust & Isp vs. altitude |
 | `HW4.py` | HW4: Ex 3-1 ideal nozzle (chamber pressure & area ratio); Fig 3-1 recreation |
+| `HW5.py` | HW5: Ex 3-2 ideal rocket (thrust & Isp, optimum expansion); Fig 3-3 recreation |
 
 ## Running
 
@@ -35,4 +36,5 @@ python HW2.py 2-2      # Example 2-2 only
 
 python HW3.py          # Minuteman thrust/Isp plot
 python HW4.py          # Ex 3-1 console output + Fig 3-1 plot
+python HW5.py          # Ex 3-2 console output + Fig 3-3 plot
 ```
