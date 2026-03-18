@@ -25,6 +25,7 @@ ISBN: 978-1-118-75388-0
 | `HW4.py` | HW4: Ex 3-1 ideal nozzle (chamber pressure & area ratio); Fig 3-1 recreation |
 | `HW5.py` | HW5: Ex 3-2 ideal rocket (thrust & Isp, optimum expansion); Fig 3-3 recreation |
 | `HW6.py` | HW6: Fig 3-4 recreation — area & velocity ratios vs. pressure ratio for several k |
+| `HW7.py` | HW7: Ex 3-3 ideal nozzle design at altitude; Ex 3-4 thrust coefficient variation & optimum altitude |
 
 ## Running
 
@@ -39,4 +40,5 @@ python HW3.py          # Minuteman thrust/Isp plot
 python HW4.py          # Ex 3-1 console output + Fig 3-1 plot
 python HW5.py          # Ex 3-2 console output + Fig 3-3 plot
 python HW6.py          # Fig 3-4 plot (k = 1.1, 1.25, 1.4, 1.7)
+python HW7.py          # Ex 3-3 console output; Ex 3-4 console output
 ```
