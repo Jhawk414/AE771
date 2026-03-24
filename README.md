@@ -26,6 +26,7 @@ ISBN: 978-1-118-75388-0
 | `HW5.py` | HW5: Ex 3-2 ideal rocket (thrust & Isp, optimum expansion); Fig 3-3 recreation |
 | `HW6.py` | HW6: Fig 3-4 recreation — area & velocity ratios vs. pressure ratio for several k |
 | `HW7.py` | HW7: Ex 3-3 ideal nozzle design at altitude; Ex 3-4 thrust coefficient variation & optimum altitude |
+| `HW10.py` | HW10: Acoustic resonance frequencies — first longitudinal, tangential, and radial modes |
 
 ## Running
 
@@ -41,4 +42,5 @@ python HW4.py          # Ex 3-1 console output + Fig 3-1 plot
 python HW5.py          # Ex 3-2 console output + Fig 3-3 plot
 python HW6.py          # Fig 3-4 plot (k = 1.1, 1.25, 1.4, 1.7)
 python HW7.py          # Ex 3-3 console output; Ex 3-4 console output
+python HW10.py         # Acoustic resonance frequency console output
 ```
