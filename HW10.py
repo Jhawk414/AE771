@@ -1,11 +1,10 @@
 import plot_style  # noqa: F401
 import numpy as np
+from constants import R_UNIV
 
 SEP = "=" * 60
 DIV = "-" * 60
 W   = 40  # label column width
-
-R_UNIV = 8314.0  # J/(kmol·K)  universal gas constant
 
 
 def _row(label, value, unit=""):

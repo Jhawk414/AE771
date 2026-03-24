@@ -8,6 +8,9 @@ g0 = 9.8066
 # Sea-level pressure (Pa)
 P_SL = 101325.0
 
+# Universal gas constant (J/(kmol·K))
+R_UNIV = 8314.0
+
 # Atmospheric state at a given altitude
 #   T   : temperature  (K    for SI table | °R      for English table)
 #   P   : pressure     (Pa   for SI table | psia    for English table)
