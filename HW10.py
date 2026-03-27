@@ -50,9 +50,10 @@ def hw10_acoustic_modes(
       Radial      (R1):   f_R1   = lambda_R1 * a / (pi * D),  lambda_R1 = 3.8317
       Convergent length (ref): L_conv = (D - Dt) / 2 / tan(half_angle)
 
-    lambda values are the Bessel-function derivative zeros:
-      J1'(lambda_T1) = 0 -> lambda_T1 = 1.8412  (1st tangential mode)
-      J0'(lambda_R1) = 0 -> lambda_R1 = 3.8317  (1st radial mode)
+    Bessel-function derivative zeros (rigid-wall BC on cylindrical wave eqn;
+    tabulated in Abramowitz & Stegun Table 9.5 and Sutton Ch. 9):
+      J1'(x) = 0  -> x = 1.8412  (lambda_T1, 1st tangential mode)
+      J0'(x) = -J1(x) = 0  -> x = 3.8317  (lambda_R1, 1st radial mode)
     """
     # Specific gas constant
     R = R_UNIV / M  # J/(kg·K)
@@ -63,9 +64,15 @@ def hw10_acoustic_modes(
     # Convergent section length from geometry (for reference)
     L_conv = (D - Dt) / 2.0 / np.tan(np.radians(half_angle))
 
-    # Bessel-function derivative zeros for transverse acoustic modes
-    lambda_T1 = 1.8412  # J1'(x) = 0  -> first tangential mode
-    lambda_R1 = 3.8317  # J0'(x) = 0  -> first radial mode
+    # Bessel-function derivative zeros for transverse acoustic modes.
+    # Derived from the rigid-wall (zero radial velocity) boundary condition
+    # applied to the cylindrical acoustic wave equation.
+    # Source: standard math tables (e.g. Abramowitz & Stegun, Table 9.5);
+    #         also tabulated in Sutton Ch. 9 (verify exact table/eq. number).
+    #   lambda_T1 = 1.8412 : first nonzero root of J1'(x) = 0
+    #   lambda_R1 = 3.8317 : first root of J0'(x) = -J1(x) = 0
+    lambda_T1 = 1.8412
+    lambda_R1 = 3.8317
 
     # Resonance frequencies
     f_L1 = a / (2.0 * L_cyl)
