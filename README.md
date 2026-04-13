@@ -16,7 +16,7 @@ ISBN: 978-1-118-75388-0
 
 | File | Contents |
 |------|----------|
-| `constants.py` | Shared physical constants (`g0`) and Appendix 2 standard atmosphere table |
+| `constants.py` | Shared physical constants (`g0`, `g0_eng`, `R_UNIV`, `R_UNIV_ENG`) and Appendix 2 standard atmosphere table (SI) |
 | `plot_style.py` | Registers the bundled Charter font and applies `ae771.mplstyle` |
 | `ae771.mplstyle` | Shared matplotlib style (Charter font, mathtext config) |
 | `Charter Regular.ttf` | Bundled font — no system installation required |
@@ -26,7 +26,9 @@ ISBN: 978-1-118-75388-0
 | `HW5.py` | HW5: Ex 3-2 ideal rocket (thrust & Isp, optimum expansion); Fig 3-3 recreation |
 | `HW6.py` | HW6: Fig 3-4 recreation — area & velocity ratios vs. pressure ratio for several k |
 | `HW7.py` | HW7: Ex 3-3 ideal nozzle design at altitude; Ex 3-4 thrust coefficient variation & optimum altitude |
+| `HW9/HW9.py` | HW9: Supersonic nozzle design — Rao (bell) and conical nozzle contours for SSME geometry |
 | `HW10.py` | HW10: Acoustic resonance frequencies — first longitudinal, tangential, and radial modes |
+| `HW12.py` | HW12: Ex 6-1 LOX/LH2 liquid rocket engine — nozzle areas, propellant weight/volume flow rates, and total propellant requirements |
 
 ## Running
 
@@ -43,4 +45,6 @@ python HW5.py          # Ex 3-2 console output + Fig 3-3 plot
 python HW6.py          # Fig 3-4 plot (k = 1.1, 1.25, 1.4, 1.7)
 python HW7.py          # Ex 3-3 console output; Ex 3-4 console output
 python HW10.py         # Acoustic resonance frequency console output
+python HW9/HW9.py      # Rao and conical nozzle contour plots
+python HW12.py         # Ex 6-1 console output
 ```
