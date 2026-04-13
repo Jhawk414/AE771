@@ -2,14 +2,16 @@
 
 from collections import namedtuple
 
-# Standard gravity (m/s²)
-g0 = 9.8066
+# Standard gravity
+g0     = 9.8066   # m/s²   SI
+g0_eng = 32.174   # ft/s²  English  (= gc numerically: 32.174 lbm·ft/(lbf·s²))
 
 # Sea-level pressure (Pa)
 P_SL = 101325.0
 
-# Universal gas constant (J/(kmol·K))
-R_UNIV = 8314.0
+# Universal gas constant
+R_UNIV     = 8314.0  # J/(kmol·K)           SI
+R_UNIV_ENG = 1545.0  # ft·lbf/(lbmol·°R)   English
 
 # Atmospheric state at a given altitude
 #   T   : temperature  (K    for SI table | °R      for English table)

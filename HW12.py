@@ -1,14 +1,10 @@
 import plot_style  # noqa: F401
 import numpy as np
+from constants import g0_eng, R_UNIV_ENG
 
 SEP = "=" * 60
 DIV = "-" * 60
 W   = 42  # label column width
-
-# English-unit physical constants
-_g0         = 32.174   # ft/s²                standard gravity
-_gc         = 32.174   # lbm·ft/(lbf·s²)      Newton's-law proportionality const
-_R_UNIV_ENG = 1545.0   # ft·lbf/(lbmol·°R)   universal gas constant
 
 
 def _row(label, value, unit=""):
@@ -54,7 +50,8 @@ def hw12_ex6_1(
     p2_p1 = p2 / p1                   # pressure ratio (dimensionless)
 
     # Specific gas constant for exhaust products  [ft²/(s²·°R)]
-    R_gas = _R_UNIV_ENG * _gc / M
+    # gc = g0_eng numerically (32.174); used here as a unit conversion factor
+    R_gas = R_UNIV_ENG * g0_eng / M
 
     # Shared factor reused in Eq. 3-16, 3-25, and 3-30
     bracket = 1.0 - p2_p1 ** ((k - 1.0) / k)
@@ -64,7 +61,7 @@ def hw12_ex6_1(
     v2 = np.sqrt((2.0 * k / (k - 1.0)) * R_gas * T1_R * bracket)  # ft/s
 
     # ---- Ideal specific impulse  (c = v2 at optimum expansion) ----------
-    Is_ideal = v2 / _g0               # s
+    Is_ideal = v2 / g0_eng             # s
 
     # ---- Ideal thrust coefficient  (Eq. 3-30, pressure term = 0) --------
     CF_ideal = np.sqrt(
