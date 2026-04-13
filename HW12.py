@@ -20,7 +20,8 @@ def hw12_ex6_1(
     T1_F   = 4380.0,    # °F            chamber temperature
     k      = 1.26,      # —             specific heat ratio
     p2     = 1.58,      # psia          nozzle exit pressure (optimum: p2 = p3)
-    t_op   = 2.5,       # min           required operation time
+    t_op     = 2.5,     # min           required operation time
+    t_margin = 2.0,     # s             extra time for start/stop transients & residuals
     eta_Is = 0.97,      # —             Is_actual / Is_ideal
     eta_CF = 0.98,      # —             CF_actual / CF_ideal
     rho_o  = 71.1,      # lbf/ft³       LOX weight density  (Table 7-1 / Fig 7-1)
@@ -47,6 +48,7 @@ def hw12_ex6_1(
     # ---- Unit conversions ------------------------------------------------
     T1_R  = T1_F + 459.67             # °F  -> °R
     t_s   = t_op * 60.0               # min -> s
+    t_eff = t_s + t_margin            # s   — adds margin for transients & residuals
     p2_p1 = p2 / p1                   # pressure ratio (dimensionless)
 
     # Specific gas constant for exhaust products  [ft²/(s²·°R)]
@@ -95,10 +97,12 @@ def hw12_ex6_1(
     Q_o = w_dot_o / rho_o                  # ft³/s
     Q_f = w_dot_f / rho_f                  # ft³/s
 
-    # ---- Total propellant for t_op minutes --------------------------------
-    W_o     = w_dot_o * t_s                # lbf
-    W_f     = w_dot_f * t_s               # lbf
-    W_total = w_dot   * t_s               # lbf
+    # ---- Total propellant for t_eff seconds (incl. transient margin) -----
+    W_o     = w_dot_o * t_eff             # lbf
+    W_f     = w_dot_f * t_eff             # lbf
+    W_total = w_dot   * t_eff             # lbf
+    V_o     = Q_o     * t_eff             # ft³
+    V_f     = Q_f     * t_eff             # ft³
 
     # ---- Output ----------------------------------------------------------
     print(f"\n{SEP}")
@@ -113,6 +117,7 @@ def hw12_ex6_1(
     _row("Specific heat ratio (k)",                   f"{k:>10.2f}")
     _row("Exit/ambient pressure (p2 = p3)",           f"{p2:>10.2f}", "psia")
     _row("Operation time",                            f"{t_op:>10.1f}", "min")
+    _row("Transient/residual margin",                 f"{t_margin:>10.1f}", "s")
     _row("Is correction factor (eta_Is)",             f"{eta_Is:>10.2f}")
     _row("CF correction factor (eta_CF)",             f"{eta_CF:>10.2f}")
     _row("LOX weight density (Table 7-1)",            f"{rho_o:>10.1f}", "lbf/ft^3")
@@ -141,17 +146,19 @@ def hw12_ex6_1(
     _row("LOX vol. flow (Q_o)",                       f"{Q_o:>10.4f}", "ft^3/s")
     _row("LH2 vol. flow (Q_f)",                       f"{Q_f:>10.4f}", "ft^3/s")
     print(DIV)
-    print(f"  Total Propellants for {t_op:.1f} min ({t_s:.0f} s):")
-    _row("Oxidizer (W_o)",                            f"{W_o:>10.1f}", "lbf")
-    _row("Fuel (W_f)",                                f"{W_f:>10.1f}", "lbf")
-    _row("Total propellant (W_total)",                f"{W_total:>10.1f}", "lbf")
+    print(f"  Total Propellants for {t_op:.1f} min + {t_margin:.0f} s margin ({t_eff:.0f} s):")
+    _row("Oxidizer weight (W_o)",                     f"{W_o:>10.1f}", "lbf")
+    _row("Fuel weight (W_f)",                         f"{W_f:>10.1f}", "lbf")
+    _row("Total propellant weight (W_total)",         f"{W_total:>10.1f}", "lbf")
+    _row("Oxidizer volume (V_o)",                     f"{V_o:>10.2f}", "ft^3")
+    _row("Fuel volume (V_f)",                         f"{V_f:>10.2f}", "ft^3")
     print(f"{SEP}\n")
 
     return (Is_ideal, Is_real, CF_ideal, CF_real,
             At_in2, A2_in2,
             w_dot, w_dot_o, w_dot_f,
             Q_o, Q_f,
-            W_o, W_f, W_total)
+            W_o, W_f, W_total, V_o, V_f)
 
 
 if __name__ == "__main__":
