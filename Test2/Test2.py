@@ -1,5 +1,5 @@
-import plot_style  # noqa: F401
 import numpy as np
+from constants import g0_eng, R_UNIV_ENG
 
 SEP = "=" * 65
 DIV = "-" * 65
@@ -13,43 +13,27 @@ def _row(label, value, unit=""):
 
 def test2(
     # ---- Problem statement givens ------------------------------------------
-    F=1_500_000.0,    # lbf        design thrust
-    p1=1000.0,        # psia       chamber pressure
-    p3=14.696,        # psia       SL ambient (= p2 for optimum expansion)
-    eta_v=0.98,       # --         velocity / Isp correction factor
-    eta_CF=0.97,      # --         thrust coefficient correction factor
+    F       = 1_500_000.0,  # lbf        design thrust
+    p1      = 1000.0,       # psia       chamber pressure
+    p3      = 14.696,       # psia       SL ambient (= p2 for optimum expansion)
+    eta_v   = 0.98,         # --         velocity / Isp correction factor
+    eta_CF  = 0.97,         # --         thrust coefficient correction factor
     # ---- Table 5-5: LOX/RP-1, r = 2.24, p1 = 1000 psia (frozen) ----------
-    T1_K=3571.0,      # K          chamber temperature
-    k=1.24,           # --         specific heat ratio (frozen)
-    M_w=21.9,         # lbm/lbmol  molecular weight of combustion products
-    r=2.24,           # --         mixture ratio O/F by mass
+    T1_K    = 3571.0,       # K          chamber temperature
+    k       = 1.24,         # --         specific heat ratio (frozen)
+    M_w     = 21.9,         # lbm/lbmol  molecular weight of combustion products
+    r       = 2.24,         # --         mixture ratio O/F by mass
     # ---- Propellant physical properties ------------------------------------
-    rho_LOX=71.1,     # lbf/ft^3   LOX density   [Table 7-1]
-    rho_RP1=50.45,    # lbf/ft^3   RP-1 density  [from Table 5-5 vol. ratio]
+    rho_LOX = 71.1,         # lbf/ft^3   LOX density   [Table 7-1]
+    rho_RP1 = 50.45,        # lbf/ft^3   RP-1 density  [Tables 5-5/7-1]
     # ---- Part 2 ------------------------------------------------------------
-    t_burn=2.75,      # min        burn time (ignore startup/shutoff)
-    # ---- Constants ---------------------------------------------------------
-    g0=32.174,        # ft/s^2     standard gravity
-    R_univ=1545.0,    # ft*lbf/(lbmol*\u00b0R)  universal gas constant (English)
+    t_burn  = 2.75,         # minutes    burn time (ignore startup/shutoff)
 ):
-    """
-    Test 2 -- F-1 Engine Redesign (LOX/RP-1, Sea-Level Optimum Expansion).
-
-    Part 1 (a-i): Engine performance and nozzle geometry.
-      Eq. 3-16  v2 = sqrt(2k/(k-1) * R*T1 * [1 - (p2/p1)^((k-1)/k)])
-      Eq. 3-30  CF = sqrt(2k^2/(k-1) * (2/(k+1))^((k+1)/(k-1))
-                     * [1 - (p2/p1)^((k-1)/k)])  +  eps*(p2-p3)/p1
-      Eq. 3-25  At/A2  (throat-to-exit area ratio from pressure ratio)
-      Eq. 3-13  M2 = sqrt([(p1/p2)^((k-1)/k) - 1] * 2/(k-1))
-
-    Part 2 (j-s): Propellant budget for t_burn minutes of operation.
-      Eq. 6-3   w_dot_ox  = r/(r+1) * w_dot
-      Eq. 6-4   w_dot_f   = 1/(r+1) * w_dot
-    """
+    """Test 2 -- F-1 Engine Redesign (LOX/RP-1, Sea-Level Optimum Expansion)."""
     # ---- Derived constants --------------------------------------------------
     p2     = p3                              # optimum expansion at design alt
-    T1     = T1_K * 1.8                      # K -> \u00b0R
-    R_gas  = R_univ * g0 / M_w              # ft^2/(s^2*\u00b0R)  specific gas const
+    T1     = T1_K * 1.8                      # K -> °R
+    R_gas  = R_UNIV_ENG * g0_eng / M_w      # ft^2/(s^2*°R)  specific gas const
     p2_p1  = p2 / p1                         # exit-to-chamber pressure ratio
     t      = t_burn * 60.0                   # min -> s
     pr_exp = (k - 1.0) / k                  # isentropic exponent (k-1)/k
@@ -65,7 +49,7 @@ def test2(
     )
 
     # b) Theoretical specific impulse
-    Isp_ideal = v2 / g0
+    Isp_ideal = v2 / g0_eng
 
     # c) Actual specific impulse
     Isp_actual = eta_v * Isp_ideal
@@ -146,11 +130,11 @@ def test2(
     _row("Ambient pressure (p3 = p2, optimum)",        f"{p3:>12.3f}", "psia")
     _row("Velocity correction factor (eta_v)",         f"{eta_v:>12.2f}")
     _row("Thrust coeff. correction (eta_CF)",          f"{eta_CF:>12.2f}")
-    _row("* Chamber temperature (T1)",                 f"{T1_K:>12.1f}", f"K  ({T1:.1f} \u00b0R)")
+    _row("* Chamber temperature (T1)",                 f"{T1_K:>12.1f}", f"K  ({T1:.1f} °R)")
     _row("* Specific heat ratio (k)",                  f"{k:>12.2f}")
     _row("* Molecular weight (Mw)",                    f"{M_w:>12.2f}", "lbm/lbmol")
     _row("* Mixture ratio O/F (r)",                    f"{r:>12.2f}")
-    _row("  => Gas constant (R = Ru*g0/Mw)",           f"{R_gas:>12.2f}", "ft^2/(s^2*\u00b0R)")
+    _row("  => Gas constant (R = Ru*g0/Mw)",           f"{R_gas:>12.2f}", "ft^2/(s^2*°R)")
     _row("LOX density",                                f"{rho_LOX:>12.2f}", "lbf/ft^3")
     _row("RP-1 density",                               f"{rho_RP1:>12.2f}", "lbf/ft^3")
     _row("Burn time",                                  f"{t_burn:>12.2f}", f"min  ({t:.0f} s)")
