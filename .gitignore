@@ -5,3 +5,7 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# cheat sheet md files
+AE771_Cheat_Sheet_v2.md
+cheet_sheet.md
