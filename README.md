@@ -29,6 +29,8 @@ ISBN: 978-1-118-75388-0
 | `HW9/HW9.py` | HW9: Supersonic nozzle design — Rao (bell) and conical nozzle contours for SSME geometry |
 | `HW10.py` | HW10: Acoustic resonance frequencies — first longitudinal, tangential, and radial modes |
 | `HW12.py` | HW12: Ex 6-1 LOX/LH2 liquid rocket engine — nozzle areas, propellant weight/volume flow rates, and total propellant requirements |
+| `Test1/Test1.py` | Test 1: In-class exam problems |
+| `Test2/Test2.py` | Test 2: In-class exam problems |
 
 ## Running
 
@@ -47,4 +49,6 @@ python HW7.py          # Ex 3-3 console output; Ex 3-4 console output
 python HW10.py         # Acoustic resonance frequency console output
 python HW9/HW9.py      # Rao and conical nozzle contour plots
 python HW12.py         # Ex 6-1 console output
+python Test1/Test1.py  # Test 1 problems
+python Test2/Test2.py  # Test 2 problems
 ```
