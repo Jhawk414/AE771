@@ -14,23 +14,24 @@ ISBN: 978-1-118-75388-0
 
 ## Structure
 
-| File | Contents |
-|------|----------|
-| `constants.py` | Shared physical constants (`g0`, `g0_eng`, `R_UNIV`, `R_UNIV_ENG`) and Appendix 2 standard atmosphere table (SI) |
-| `plot_style.py` | Registers the bundled Charter font and applies `ae771.mplstyle` |
-| `ae771.mplstyle` | Shared matplotlib style (Charter font, mathtext config) |
-| `Charter Regular.ttf` | Bundled font — no system installation required |
-| `HW2.py` | Chapter 2 example problems (Ex 2-1, Ex 2-2) |
-| `HW3.py` | HW3: Minuteman first-stage rocket — net thrust & Isp vs. altitude |
-| `HW4.py` | HW4: Ex 3-1 ideal nozzle (chamber pressure & area ratio); Fig 3-1 recreation |
-| `HW5.py` | HW5: Ex 3-2 ideal rocket (thrust & Isp, optimum expansion); Fig 3-3 recreation |
-| `HW6.py` | HW6: Fig 3-4 recreation — area & velocity ratios vs. pressure ratio for several k |
-| `HW7.py` | HW7: Ex 3-3 ideal nozzle design at altitude; Ex 3-4 thrust coefficient variation & optimum altitude |
-| `HW9/HW9.py` | HW9: Supersonic nozzle design — Rao (bell) and conical nozzle contours for SSME geometry |
-| `HW10.py` | HW10: Acoustic resonance frequencies — first longitudinal, tangential, and radial modes |
+| File | Contents                                                                                                                         |
+|------|----------------------------------------------------------------------------------------------------------------------------------|
+| `constants.py` | Shared physical constants (`g0`, `g0_eng`, `R_UNIV`, `R_UNIV_ENG`) and Appendix 2 standard atmosphere table (SI)                 |
+| `plot_style.py` | Registers the bundled Charter font and applies `ae771.mplstyle`                                                                  |
+| `ae771.mplstyle` | Shared matplotlib style (Charter font, mathtext config)                                                                          |
+| `Charter Regular.ttf` | Bundled font — no system installation required                                                                                   |
+| `HW2.py` | Chapter 2 example problems (Ex 2-1, Ex 2-2)                                                                                      |
+| `HW3.py` | HW3: Minuteman first-stage rocket — net thrust & Isp vs. altitude                                                                |
+| `HW4.py` | HW4: Ex 3-1 ideal nozzle (chamber pressure & area ratio); Fig 3-1 recreation                                                     |
+| `HW5.py` | HW5: Ex 3-2 ideal rocket (thrust & Isp, optimum expansion); Fig 3-3 recreation                                                   |
+| `HW6.py` | HW6: Fig 3-4 recreation — area & velocity ratios vs. pressure ratio for several k                                                |
+| `HW7.py` | HW7: Ex 3-3 ideal nozzle design at altitude; Ex 3-4 thrust coefficient variation & optimum altitude                              |
+| `HW9/HW9.py` | HW9: Supersonic nozzle design — Rao (bell) and conical nozzle contours for SSME geometry                                         |
+| `HW10.py` | HW10: Acoustic resonance frequencies — first longitudinal, tangential, and radial modes                                          |
 | `HW12.py` | HW12: Ex 6-1 LOX/LH2 liquid rocket engine — nozzle areas, propellant weight/volume flow rates, and total propellant requirements |
-| `Test1/Test1.py` | Test 1: In-class exam problems |
-| `Test2/Test2.py` | Test 2: In-class exam problems |
+| `HW13.py` | HW13: Ex 8-1 film coefficient effects on heat transfer rate and wall temperatures in a liquid-cooled thrust chamber              |
+| `Test1/Test1.py` | Test 1: Take-home exam problems                                                                                                  |
+| `Test2/Test2.py` | Test 2: Take-home exam problems                                                                                                   |
 
 ## Running
 
@@ -49,6 +50,7 @@ python HW7.py          # Ex 3-3 console output; Ex 3-4 console output
 python HW10.py         # Acoustic resonance frequency console output
 python HW9/HW9.py      # Rao and conical nozzle contour plots
 python HW12.py         # Ex 6-1 console output
+python HW13.py         # Ex 8-1 console output
 python Test1/Test1.py  # Test 1 problems
 python Test2/Test2.py  # Test 2 problems
 ```
