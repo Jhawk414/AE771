@@ -12,7 +12,80 @@ def _row(label, value, unit=""):
     print(f"    {label:<{W}}: {value}  {unit}")
 
 
-def hw14_prob2(
+# =========================================================================== #
+#  Q1 -- Pressure drop through a regenerative cooling passage
+# =========================================================================== #
+
+def hw14_q1(
+    a_in   = 0.125,    # in        cooling passage width  (1/8 in)
+    b_in   = 0.1875,   # in        cooling passage height (3/16 in)
+    gamma  = 60.5,     # lbf/ft^3  specific weight of aniline
+    L_in   = 83.0,     # in        length of cooling passage
+    v      = 21.0,     # ft/sec    average coolant velocity
+    Re     = 16600.0,  # --        average Reynolds number
+):
+    """
+    HW14 / Q1 -- Pressure drop through a regenerative cooling passage.
+
+    Coolant is aniline flowing through a rectangular steel passage.
+
+    Equations:
+      Hydraulic diameter:  D_h = 4*A / P     (A = a*b, P = 2(a+b))
+      Blasius (smooth):    f   = 0.316 / Re^0.25   (Darcy friction factor)
+      Darcy-Weisbach:      dP  = f * (L/D_h) * gamma * v^2 / (2*g)
+    """
+    g = g0_eng                               # 32.174 ft/s^2
+
+    # -- Passage geometry ------------------------------------------------------
+    a_ft  = a_in / 12.0                      # ft
+    b_ft  = b_in / 12.0                      # ft
+    A_cs  = a_ft * b_ft                      # ft^2   cross-section area
+    P_wet = 2.0 * (a_ft + b_ft)             # ft     wetted perimeter
+    D_h   = 4.0 * A_cs / P_wet              # ft     hydraulic diameter
+    L     = L_in / 12.0                      # ft
+
+    # -- Friction factor (Blasius, smooth pipe) --------------------------------
+    f = 0.316 / Re**0.25
+
+    # -- Pressure drop (Darcy-Weisbach) ----------------------------------------
+    dP_psf = f * (L / D_h) * gamma * v**2 / (2.0 * g)   # lbf/ft^2
+    dP_psi = dP_psf / 144.0                               # psi
+
+    # -- Output ----------------------------------------------------------------
+    print(f"\n{SEP}")
+    print("  HW14 / Q1: Pressure Drop -- Regenerative Cooling Passage")
+    print(SEP)
+
+    print("  Inputs:")
+    _row("Cooling passage dimensions",         f"  {a_in:g} x {b_in:g}", "in")
+    _row("Coolant",                                 "       Aniline")
+    _row("Specific weight (gamma)",             f"{gamma:>10.1f}",    "lbf/ft^3")
+    _row("Passage length (L)",                  f"{L_in:>10.1f}",    "in")
+    _row("Average coolant velocity (v)",        f"{v:>10.1f}",       "ft/sec")
+    _row("Average Reynolds number (Re)",        f"{Re:>10.0f}")
+
+    print(DIV)
+    print("  Intermediate:")
+    _row("Hydraulic diameter (D_h)",            f"{D_h:>10.6f}",     "ft")
+    _row("Passage cross-section area (A)",      f"{A_cs:>14.6e}",    "ft^2")
+    _row("Passage length (L)",                  f"{L:>10.4f}",       "ft")
+    _row("Friction factor (f, Blasius)",        f"{f:>10.6f}")
+    _row("L / D_h",                             f"{L / D_h:>10.2f}")
+
+    print(DIV)
+    print("  Results:")
+    _row("Pressure drop (dP)     [Darcy-Weisbach]", f"{dP_psf:>10.1f}", "lbf/ft^2")
+    _row("Pressure drop (dP)     [Darcy-Weisbach]", f"{dP_psi:>10.1f}", "psi")
+    print(f"{SEP}\n")
+
+    return dP_psi
+
+
+# =========================================================================== #
+#  Q2 -- Film coefficient and wall temps in a water-cooled thrust chamber
+# =========================================================================== #
+
+def hw14_q2(
     T_l      = 100.0,      # deg F            average water temperature
     k_l      = 1.07e-4,    # Btu/(s-ft-deg F) thermal conductivity of water
     T_g      = 4500.0,     # deg F            gas temperature
@@ -26,8 +99,8 @@ def hw14_prob2(
     k_wall   = 26.0,       # Btu/(hr-ft^2-deg F/ft) wall thermal conductivity
 ):
     """
-    HW14 / Problem 2 -- Film coefficient and wall temperatures in a
-    water-cooled steel thrust chamber during a static test.
+    HW14 / Q2 -- Film coefficient and wall temperatures in a water-cooled
+    steel thrust chamber during a static test.
 
     Given the heat flux, coolant properties, passage geometry, and wall
     properties, determine:
@@ -79,7 +152,7 @@ def hw14_prob2(
 
     # -- Output ----------------------------------------------------------------
     print(f"\n{SEP}")
-    print("  HW14 / Problem 2: Water-Cooled Steel Thrust Chamber (Static Test)")
+    print("  HW14 / Q2: Water-Cooled Steel Thrust Chamber (Static Test)")
     print(SEP)
 
     print("  Inputs:")
@@ -120,4 +193,5 @@ def hw14_prob2(
 
 
 if __name__ == "__main__":
-    hw14_prob2()
+    hw14_q1() # pressure drop
+    #hw14_q2() # film coeff and wall temps

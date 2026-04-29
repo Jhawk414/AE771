@@ -30,7 +30,7 @@ ISBN: 978-1-118-75388-0
 | `HW10.py` | HW10: Acoustic resonance frequencies — first longitudinal, tangential, and radial modes                                          |
 | `HW12.py` | HW12: Ex 6-1 LOX/LH2 liquid rocket engine — nozzle areas, propellant weight/volume flow rates, and total propellant requirements |
 | `HW13.py` | HW13: Ex 8-1 film coefficient effects on heat transfer rate and wall temperatures in a liquid-cooled thrust chamber              |
-| `HW14.py` | HW14: Film coefficient and wall temperatures in a water-cooled steel thrust chamber (static test)                                |
+| `HW14.py` | HW14: Q1 cooling-passage pressure drop; Q2 film coefficient & wall temperatures in a water-cooled thrust chamber               |
 | `Test1/Test1.py` | Test 1: Take-home exam problems                                                                                                  |
 | `Test2/Test2.py` | Test 2: Take-home exam problems                                                                                                   |
 
@@ -52,7 +52,7 @@ python HW10.py         # Acoustic resonance frequency console output
 python HW9/HW9.py      # Rao and conical nozzle contour plots
 python HW12.py         # Ex 6-1 console output
 python HW13.py         # Ex 8-1 console output
-python HW14.py         # Water-cooled thrust chamber console output
+python HW14.py         # Q1 pressure drop; Q2 film coeff & wall temps
 python Test1/Test1.py  # Test 1 problems
 python Test2/Test2.py  # Test 2 problems
 ```
